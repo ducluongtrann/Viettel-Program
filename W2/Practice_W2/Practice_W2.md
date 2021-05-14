@@ -43,10 +43,10 @@ và vào máy ảo để lấy IP
 **inventory.ini**
 
 ```
-[vm1]
+[fil]
 192.168.11.104
 
-[vm2]
+[fil_cl]
 192.168.11.105
 
 [all:vars]
