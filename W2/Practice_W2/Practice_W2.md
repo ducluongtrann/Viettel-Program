@@ -17,7 +17,7 @@ $ python3 -m virtualenv ansible
 $ source ansible/bin/activate
 $ python -m pip install ansible
 ```
-<img src="fig/fig1.jpg">
+<img src="fig1.jpg">
 
 #### 3. Cài đặt sshpass
 ```
@@ -35,9 +35,10 @@ remote_user = filtb
 ```
 Trước tiên chúng ta thiết lập và lấy ip máy ảo bằng cách:
 
-<img src="fig/fig2.jpg">
+<img src="fig2.jpg">
 
-và vào máy ảo để lấy IP ``` $ ifconfig ```
+và vào máy ảo để lấy IP 
+``` $ ifconfig ```
 
 **inventory.ini**
 
@@ -57,7 +58,7 @@ Test thử Ansible
 ```
 $ ansible -i inventory.ini all -m ping
 ```
-<img src="./fig/fig3.jpg">
+<img src="fig3.jpg">
 
 
 ## Practice 1
@@ -89,7 +90,7 @@ $ ansible -i inventory.ini all -m ping
 ```
 $ ansible-playbook -i inventory.ini docker-vm-playbook.yaml -k -K
 ```
-<img src="./fig/fig4.jpg">
+<img src="fig4.jpg">
 ### 2. Sử dụng Ansible để deploy Wordpress trên VM_1
 Tương tự 1. ta cũng khởi tạo ```wordpress-playbook.yaml``` va chạy file này
 
@@ -115,17 +116,17 @@ Run playbook:
 ```
 ansible-playbook -i inventory.ini deploy-wordpress-playbook.yaml -k -K
 ```
-<img src="./fig/fig5.jpg">
+<img src="fig5.jpg">
 -
 Để kiểm tra xem chúng ta đã tạo các image thành công, ta ssh vào VM_1 và kiểm tra với command:
 
 ```
 $ sudo docker ps
 ```
-<img src="./fig/fig6.jpg">
+<img src="fig6.jpg">
 -
 ### 3. Truy cập vào địa chỉ IP VM_1 tại host để xem kết quả:
-<img src="./fig/fig7.jpg">
+<img src="fig7.jpg">
 -
 ## Practice 2: 
 Chúng ta tạo thêm 1 máy ảo tương tự và setting để lấy địa chỉ IP của máy ảo VM_2 [fil cl]
@@ -182,7 +183,7 @@ ansible-playbook -i inventory.ini docker-vm-playbook.yaml -k -K
     debug:
      var: debugRunMariadb
 ```
-<img src="./fig/fig8.jpg">
+<img src="fig8.jpg">
 #### 2.2 Run
 ```
 ansible-playbook -i inventory.ini install-mariadb.yaml -k -K
@@ -214,7 +215,7 @@ ansible-playbook -i inventory.ini install-mariadb.yaml -k -K
 ```
 ansible-playbook -i inventory.ini install-wordpress.yaml -k -K
 ```
-<img src="./fig/fig9.jpg">
+<img src="fig9.jpg">
 #### 3.3 Kiểm tra lại các container trên 2 máy ảo bằng Ansible
 ```
 - name: docker ps
@@ -230,6 +231,8 @@ ansible-playbook -i inventory.ini install-wordpress.yaml -k -K
     debug:
      var: result
 ```
-<img src="./fig/fig10.jpg">
+<img src="fig10.jpg">
 #### 3.4 Truy cập địa chỉ https://192.168.11.105:8443 tại host:
-<img src="./fig/fig11.jpg">
+<img src="fig11.jpg">
+
+
