@@ -120,7 +120,7 @@ Run playbook:
 ansible-playbook -i inventory.ini deploy-wordpress-playbook.yaml -k -K
 ```
 <img src="fig5.jpg">
--
+
 Để kiểm tra xem chúng ta đã tạo các image thành công, ta ssh vào VM_1 và kiểm tra với command:
 
 ```
@@ -131,11 +131,11 @@ $ sudo docker ps
 
 ### 3. Truy cập vào địa chỉ IP VM_1 tại host để xem kết quả:
 <img src="fig7.jpg">
----
+
 ## Practice 2: 
 Chúng ta tạo thêm 1 máy ảo tương tự và setting để lấy địa chỉ IP của máy ảo VM_2 [filcl]
 
-	### 1. Cài đặt tương tự Docker trên máy ảo 2 thông qua ``` docker-vm-playbook.yaml```
+### 1. Cài đặt tương tự Docker trên máy ảo 2 thông qua ``` docker-vm-playbook.yaml```
 Với thay đổi thông số ```hosts: fil_cl```
 
 ```
@@ -160,12 +160,14 @@ Với thay đổi thông số ```hosts: fil_cl```
       name: docker
       state: started
 ```
+Run
 
 ```
 ansible-playbook -i inventory.ini docker-vm-playbook.yaml -k -K
 ```
 ### 2. Cài đặt MariaDB trên VM_1 [fil]
 #### 2.1 Tạo file install-mariadb.yaml
+
 ```
 - name: Install MariaDb
   hosts: fil
@@ -188,12 +190,14 @@ ansible-playbook -i inventory.ini docker-vm-playbook.yaml -k -K
      var: debugRunMariadb
 ```
 <img src="fig8.jpg">
+
 #### 2.2 Run
 ```
 ansible-playbook -i inventory.ini install-mariadb.yaml -k -K
 ```
 ### 3. Cài đặt Wordpress trên VM_2 [filcl]
 #### 3.1 Tạo file install-wordpress.yaml
+
 ```
 - name: Install WordPress fil_cl
   hosts: fil_cl
@@ -215,12 +219,16 @@ ansible-playbook -i inventory.ini install-mariadb.yaml -k -K
     debug:
      var: debugRunWp
 ```
+
 #### 3.2 Run
+
 ```
 ansible-playbook -i inventory.ini install-wordpress.yaml -k -K
 ```
 <img src="fig9.jpg">
+
 #### 3.3 Kiểm tra lại các container trên 2 máy ảo bằng Ansible
+
 ```
 - name: docker ps
   hosts: fil,fil_cl
@@ -235,7 +243,9 @@ ansible-playbook -i inventory.ini install-wordpress.yaml -k -K
     debug:
      var: result
 ```
+
 <img src="fig10.jpg">
+
 #### 3.4 Truy cập địa chỉ https://192.168.11.105:8443 tại host:
 <img src="fig11.jpg">
 
