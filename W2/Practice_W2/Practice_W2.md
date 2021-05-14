@@ -36,6 +36,7 @@ remote_user = filtb
 Trước tiên chúng ta thiết lập và lấy ip máy ảo bằng cách:
 
 <img src="./fig/fig2.jpg">
+
 và vào máy ảo để lấy IP ``` $ ifconfig ```
 
 **inventory.ini**
