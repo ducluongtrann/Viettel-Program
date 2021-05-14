@@ -121,15 +121,16 @@ ansible-playbook -i inventory.ini deploy-wordpress-playbook.yaml -k -K
 Để kiểm tra xem chúng ta đã tạo các image thành công, ta ssh vào VM_1 và kiểm tra với command:
 
 ```
+$ ssh fil@192.168.11.104
 $ sudo docker ps
 ```
 <img src="fig6.jpg">
--
+
 ### 3. Truy cập vào địa chỉ IP VM_1 tại host để xem kết quả:
 <img src="fig7.jpg">
--
+---
 ## Practice 2: 
-Chúng ta tạo thêm 1 máy ảo tương tự và setting để lấy địa chỉ IP của máy ảo VM_2 [fil cl]
+Chúng ta tạo thêm 1 máy ảo tương tự và setting để lấy địa chỉ IP của máy ảo VM_2 [filcl]
 
 	### 1. Cài đặt tương tự Docker trên máy ảo 2 thông qua ``` docker-vm-playbook.yaml```
 Với thay đổi thông số ```hosts: fil_cl```
