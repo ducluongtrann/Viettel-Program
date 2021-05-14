@@ -17,7 +17,7 @@ $ python3 -m virtualenv ansible
 $ source ansible/bin/activate
 $ python -m pip install ansible
 ```
-<img src="./fig/fig1.jpg">
+<img src="fig/fig1.jpg">
 
 #### 3. Cài đặt sshpass
 ```
@@ -35,7 +35,7 @@ remote_user = filtb
 ```
 Trước tiên chúng ta thiết lập và lấy ip máy ảo bằng cách:
 
-<img src="./fig/fig2.jpg">
+<img src="fig/fig2.jpg">
 
 và vào máy ảo để lấy IP ``` $ ifconfig ```
 
