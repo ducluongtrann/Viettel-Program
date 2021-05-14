@@ -1,0 +1,21 @@
+---
+
+- name: test playbook
+  hosts: vm
+  remote_user: charlie
+  gather_facts: false
+
+  tasks:
+  - name: ping
+    ping:
+    register: result
+  - name: Install docker.io
+    become: yes
+    apt:
+      name: docker.io
+      state: present
+  - name: Ensure docker service is running
+    become: yes
+    service:
+      name: docker
+      state: started

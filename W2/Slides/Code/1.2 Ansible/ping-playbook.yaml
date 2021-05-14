@@ -1,0 +1,14 @@
+---
+
+- name: test playbook
+  hosts: vm
+  remote_user: charlie2
+  gather_facts: false
+
+  tasks:
+  - name: ping
+    ping:
+    register: result
+  - name: print ping data
+    debug:
+      var: result

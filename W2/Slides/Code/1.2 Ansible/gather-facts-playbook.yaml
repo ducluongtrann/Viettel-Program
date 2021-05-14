@@ -1,0 +1,16 @@
+---
+
+- name: test playbook
+  hosts: vm
+  remote_user: charlie
+  gather_facts: false
+
+  tasks:
+  - name: ping
+    ping:
+  - name: gather facts
+    setup:
+    register: fact_result
+  - name: print setup data
+    debug:
+      var: fact_result
