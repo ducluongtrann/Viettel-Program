@@ -91,8 +91,10 @@ $ ansible -i inventory.ini all -m ping
 $ ansible-playbook -i inventory.ini docker-vm-playbook.yaml -k -K
 ```
 <img src="fig4.jpg">
+
 ### 2. Sử dụng Ansible để deploy Wordpress trên VM_1
-Tương tự 1. ta cũng khởi tạo ```wordpress-playbook.yaml``` va chạy file này
+Tương tự 1. ta cũng khởi tạo 
+```wordpress-playbook.yaml``` và chạy file này
 
 ```
 - name: deploy wordpress
@@ -111,6 +113,7 @@ Tương tự 1. ta cũng khởi tạo ```wordpress-playbook.yaml``` va chạy fi
     become: yes
     command: docker-compose up -d
 ```
+
 Run playbook:
 
 ```
