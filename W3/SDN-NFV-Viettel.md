@@ -3,9 +3,11 @@
 - [Contents](#contents)
   - [OpenvSwitch](#openvswitch)
   - [Practice 1](#practice-1)
+    - [Topology](#topology)
     - [Chuẩn bị](#chuẩn-bị)
-    - [Tạo switch ảo và cấu hình Vlan tag](#tạo-switch-ảo-và-cấu-hình-vlan-tag)
-    - [Tạo switch ảo và cấu hình Vxlan tag](#tạo-switch-ảo-và-cấu-hình-vxlan-tag)
+    - [Cấu hình](#cấu-hình)
+    - [Cài Wireshark và test ping](#cài-wireshark-và-test-ping)
+  - [Điểm mạnh và điểm yếu của Vxlan trong Datacenter](#điểm-mạnh-và-điểm-yếu-của-vxlan-trong-datacenter)
 
 ## OpenvSwitch
 
