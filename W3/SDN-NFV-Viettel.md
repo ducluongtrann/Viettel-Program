@@ -8,6 +8,7 @@
     - [Cấu hình](#cấu-hình)
     - [Cài Wireshark và test ping](#cài-wireshark-và-test-ping)
   - [Điểm mạnh và điểm yếu của Vxlan trong Datacenter](#điểm-mạnh-và-điểm-yếu-của-vxlan-trong-datacenter)
+  - [Các kết luận và chú ý](#các-kết-luận-và-chú-ý)
 
 ## OpenvSwitch
 
@@ -35,7 +36,7 @@ VXLAN đạt được điều này bằng cách tạo các Frames Layer 2 bên t
 
 - Cấu hình cơ bản với Openvswitch
 
-### Topology 
+### Topology
 
 ![diagram](./img/diagram.png)
 
@@ -65,15 +66,15 @@ Sau khi cài đặt xong, chạy ```ovs-vsctl show``` để kiểm tra việc c�
 2. Tạo switch và 2 interface ảo trên Host
 
 ```bash
-$ sudo ovs-vsctl add-br sw0
-$ sudo tuntap add mode tap sw0-p1  \\tạo interface ảo
-$ sudo tuntap add mode tap sw0-p2
-$ sudo ovs-vsctl add-port sw0 sw0-p1
+sudo ovs-vsctl add-br sw0
+sudo tuntap add mode tap sw0-p1  \\tạo interface ảo
+sudo tuntap add mode tap sw0-p2
+sudo ovs-vsctl add-port sw0 sw0-p1
 sudo ovs-vsctl add-port sw0 sw0-p2
 
-$ sudo interface sw0 up
-$ sudo interface sw0-p1 up
-$ sudo interface sw0-p2 up
+sudo interface sw0 up
+sudo interface sw0-p1 up
+sudo interface sw0-p2 up
 ```
 
 Tạo flow-tables truyền thông các interface ảo cho SW0
@@ -87,8 +88,8 @@ Kiểm tra kết quả bằng lệnh
 
 ```bash
 
-$ sudo ifconfig
-$ sudo ovs-vsctl show
+sudo ifconfig
+sudo ovs-vsctl show
 sudo ovs-ofctl dump-flows s1
 ```
 
@@ -106,7 +107,7 @@ Dump-flow
 
 **VM1:**
 
-- Tạo switch 
+- Tạo switch
 
 ```bash
 sudo ovs-vsctl add-br sw1
@@ -148,7 +149,7 @@ VM2
 ovs-vsctl add-port sw2 tun0 -- set interface tun0 type=vxlan options:remote_ip=192.168.56.12 options:key=123
 ```
 
-Kết quả:
+**Kết quả:**
 
 - Trên VM1
 
@@ -162,8 +163,7 @@ Kết quả:
 
 ### Cài Wireshark và test ping
 
-- Cài Wireshark sử dụng cổng sw0-p1 hoặc sw0-p2 để capture gói tin
-- Phân tích một gói tin ICMP bắt được trên interface eth0 có kết quả như sau.
+- Cài Wireshark sử dụng interface sw0-p1 hoặc sw0-p2 để capture gói tin ICMP có kết quả như sau.
 
 ![testping](./img/testping.png)
 
@@ -172,13 +172,21 @@ Kết quả:
 ## Điểm mạnh và điểm yếu của Vxlan trong Datacenter
 
 - ### Điểm mạnh
-    - Tăng số lượng segments lớp 2: Các thiết kế dựa trên Vlan bị giới hạn tối đa 4.096 phân đoạn Lớp 2 do sử dụng Vlan ID 12 bit. VXLAN giới thiệu một VNID 24 bit về mặt lý thuyết hỗ trợ tới 16 triệu segments.
-    - Hỗ trợ nhiều khách hàng trên cùng 1 hệ thống: VXLAN Fabric hỗ trợ nhiều khách hàng trên cả Lớp 2 (mỗi VNID định danh cho 1 khách hàng khác nhau) và Lớp 3 (sử dụng VRF khác nhau cho mỗi khách hàng khác nhau.
-    - Tính di động: VM có thể di chuyển giữa các Server hiện tại trong các miền Lớp 2 riêng biệt bằng cách tạo đường hầm truy cập thông qua mạng IP. Vì vậy, bạn có thể linh hoạt phân bổ tài nguyên trong hoặc giữa các trung tâm dữ liệu mà không bị ràng buộc bởi các ranh giới Lớp 3. Cung cấp tính linh hoạt và di động khi thiết kế các mạng Layer 2.
-    - Multi-path Layer 2: các mạng lớp 2 chỉ hỗ trợ 1 tuyến đường hoạt động vì STP sẽ Block các đường dự phòng để tránh loop. VXLAN hoạt động dựa trên các mạng Lớp 3 cung cấp nhiều tuyến đường tới đích mà không phụ thuộc vào STP.
-    - Tận dụng tốt hơn các kết nối mạng khả dụng trong cơ sở hạ tầng bên dưới: Các gói tin VXLAN được truyền qua các lớp mạng dựa vào thông tin trong Header cùng giao thức định tuyến của Lớp 3 để sử dụng tất cả các kết nối sẵn có.
+  - Tăng số lượng segments lớp 2: Các thiết kế dựa trên Vlan bị giới hạn tối đa 4.096 phân đoạn Lớp 2 do sử dụng Vlan ID 12 bit. VXLAN giới thiệu một VNID 24 bit về mặt lý thuyết hỗ trợ tới 16 triệu segments.
+  - Hỗ trợ nhiều khách hàng trên cùng 1 hệ thống: VXLAN Fabric hỗ trợ nhiều khách hàng trên cả Lớp 2 (mỗi VNID định danh cho 1 khách hàng khác nhau) và Lớp 3 (sử dụng VRF khác nhau cho mỗi khách hàng khác nhau.
+  - Tính di động: VM có thể di chuyển giữa các Server hiện tại trong các miền Lớp 2 riêng biệt bằng cách tạo đường hầm truy cập thông qua mạng IP. Vì vậy, bạn có thể linh hoạt phân bổ tài nguyên trong hoặc giữa các trung tâm dữ liệu mà không bị ràng buộc bởi các ranh giới Lớp 3. Cung cấp tính linh hoạt và di động khi thiết kế các mạng Layer 2.
+  - Multi-path Layer 2: các mạng lớp 2 chỉ hỗ trợ 1 tuyến đường hoạt động vì STP sẽ Block các đường dự phòng để tránh loop. VXLAN hoạt động dựa trên các mạng Lớp 3 cung cấp nhiều tuyến đường tới đích mà không phụ thuộc vào STP.
+  - Tận dụng tốt hơn các kết nối mạng khả dụng trong cơ sở hạ tầng bên dưới: Các gói tin VXLAN được truyền qua các lớp mạng dựa vào thông tin trong Header cùng giao thức định tuyến của Lớp 3 để sử dụng tất cả các kết nối sẵn có.
 
 - ### Điểm yếu
 
-    - Để triển khai được công nghệ Vxlan trên quy mô lớn, cần phải rủ bỏ những khái niệm cũ về thiết bị vật lý như Switch, Firewall, Loadbanacer…
-    - Gói tin cần đóng gói thêm nên chắc là sẽ tốn thêm lưu lượng cho Header :D 
+  - Để triển khai được công nghệ Vxlan trên quy mô lớn, cần phải rủ bỏ những khái niệm cũ về thiết bị vật lý như Switch, Firewall, Loadbanacer…
+  - Gói tin cần đóng gói thêm nên chắc là sẽ tốn thêm lưu lượng cho Header :D
+
+---
+
+## Các kết luận và chú ý
+
+1. Đổi các ký hiệu sw thành br (bridge) vì đây là các bridge
+2. Khi kết nối 2 VM qua bridge thì cần cấu hình định tuyến để nó biết được đường đi
+3. Nếu 2 VM dùng chung 1 interface đầu vào thì khi ping sẽ là loopback?
