@@ -165,6 +165,7 @@ $ sudo docker run -d --name wordpress \
     -p 8080:8080 -p 8443:8443 \
     --env ALLOW_EMPTY_PASSWORD=yes \
     --env WORDPRESS_DATABASE_HOST=192.168.1.81 \
+    --env WORDPRESS_DATABASE_PORT=3306 \
     --env WORDPRESS_DATABASE_USER=bn_wordpress \
     --env WORDPRESS_DATABASE_PASSWORD=luong123 \
     --env WORDPRESS_DATABASE_NAME=bitnami_wordpress \
@@ -172,7 +173,6 @@ $ sudo docker run -d --name wordpress \
     --volume wordpress_data:/bitnami/wordpress \
     bitnami/wordpress:latest
 
-   --add-host mariadb:192.168.1.81 \
 ```
 
 **Then, open web browser and access <http://192.168.1.159:8080>**
