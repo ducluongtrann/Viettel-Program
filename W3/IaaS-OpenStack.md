@@ -1,6 +1,9 @@
-# Content
+# Setup OpenStack AIO inside VM with Kolla
 
-- [Content](#content)
+## Content
+
+- [Setup OpenStack AIO inside VM with Kolla](#setup-openstack-aio-inside-vm-with-kolla)
+  - [Content](#content)
   - [I. Yêu cầu](#i-yêu-cầu)
   - [II. Cài đặt](#ii-cài-đặt)
   - [III. Cài đặt và cấu hình Openstack Train bằng Kolla Ansible](#iii-cài-đặt-và-cấu-hình-openstack-train-bằng-kolla-ansible)
@@ -29,7 +32,7 @@
 
     *Lưu ý: để dùng được Host-only chúng ta phải tạo Host-only Network trước tại phần File của máy ảo*
 
-![network](./img2/Network11.jpg)
+![network](./img2/Network11.png)
 
 **OpenStack**
 
