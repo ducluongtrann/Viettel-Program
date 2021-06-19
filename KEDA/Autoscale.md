@@ -224,7 +224,7 @@ Sau khi cài đặt xong các module cần thiết ta chạy:
 ```console
 node promtest.js
 ```
-![alt]()
+![alt](./image/nodejs.png)
 
 2. Chạy các file manifest
 
@@ -234,8 +234,8 @@ kubectl apply -f keda-scaledobject.yaml
 ```
 Sau đó ta truy cập lại vào các trang prometheus UI và Grafana để xem kết quả:
 > Khi vào trong Grafana ta phải import file grafana dashboard để xem
-
-![kubectl apply -f]()
+![alt](./image/pro_ui1.png)
+![kkk](./image/grafana1.png)
 
 ## Test
 
@@ -250,5 +250,17 @@ curl --location --request POST 'http://<EXTERNAL_IP_OF_SERVICE>:4000/api/count' 
 ```
 - Ta thấy các kết quả:
 
-- Để có thể xem được kết quả thay đổi liên tục của các pod đang scale ta cài thêm gói:
+request = 7
 
+![alt](./image/scale10.png)
+![alt](./image/custommetric.png)
+
+
+![alt](./image/scale1.png)
+
+request = 20
+![count](./image/custommetric20.png)
+
+![alt](./image/scale20.png)
+- Để có thể xem được kết quả thay đổi liên tục của các pod đang scale ta cài thêm gói:
+... 
